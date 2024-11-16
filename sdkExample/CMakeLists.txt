@@ -14,15 +14,7 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(LIB_BASE_DIR ${CMAKE_CURRENT_LIST_DIR}/../sdk/debug)
-else()
-    set(LIB_BASE_DIR ${CMAKE_CURRENT_LIST_DIR}/../sdk/release)
-endif()
-set(INCLUDE_BASE_DIR ${CMAKE_CURRENT_LIST_DIR}/../sdk/include)
-
-message(STATUS ${LIB_BASE_DIR})
-message(STATUS ${INCLUDE_BASE_DIR})
+include(../sdk/sdk.cmake)
 
 file(GLOB _SOURCES CONFIGURE_DEPENDS
     *.cpp *.h
@@ -34,11 +26,11 @@ qt6_add_executable(Example
 )
 
 target_include_directories(Example PRIVATE
-    ${INCLUDE_BASE_DIR}
+    ${SDK_INCLUDE_BASE_DIR}
 )
 
 target_link_directories(Example PRIVATE
-    ${LIB_BASE_DIR}
+    ${SDK_LIB_BASE_DIR}
 )
 
 target_link_libraries(Example PRIVATE
@@ -58,11 +50,7 @@ target_link_libraries(Example PRIVATE
 )
 
 add_compile_definitions(
-    HCOMPRESS_BUILD_STATIC_LIBS
-    HFONTAWESOME_BUILD_STATIC_LIBS
-    HMATH_BUILD_STATIC_LIBS
-    HMISC_BUILD_STATIC_LIBS
-    HQT_BUILD_STATIC_LIBS
+    ${SDK_COMPILE_DEFINATIONS}
 )
 
 qt_finalize_executable(Example)
