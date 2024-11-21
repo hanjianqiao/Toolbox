@@ -1,3 +1,6 @@
+#ifndef QT_AWESOME_ENUM_GENERATED_H
+#define QT_AWESOME_ENUM_GENERATED_H
+
 namespace fa {
 #define FONT_AWESOME_PRO
 enum fa_styles {
@@ -4809,3 +4812,4 @@ enum fa_pro_icons : unsigned short {
 };
 #endif
 }
+#endif // QT_AWESOME_ENUM_GENERATED_H
